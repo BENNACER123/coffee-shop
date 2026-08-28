@@ -1,0 +1,642 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg: #07080a;
+  --bg-secondary: #121317;
+  --card: #201f21;
+  --gold: #a57d4e;
+  --text: #f2f0ec;
+  --text-muted: #a9a5a0;
+  --border: #413e40;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+header {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 18px clamp(20px, 4vw, 48px);
+  width: calc(100% - 40px);
+  border-radius: 20px;
+  background: #0b0c0f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  color: var(--gold);
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem;
+  letter-spacing: 3px;
+}
+.logo::first-letter {
+  color: var(--text-muted);
+  font-size: 1.65rem;
+  font-style: italic;
+}
+nav ul,
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2vw, 28px);
+  list-style: none;
+}
+nav a {
+  color: var(--text-muted);
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  text-decoration: none;
+  position: relative;
+}
+nav a::after {
+  background: var(--gold);
+  bottom: -5px;
+  content: "";
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transition: width 0.3s;
+  width: 0;
+}
+nav a:hover {
+  color: var(--gold);
+}
+nav a:hover::after {
+  width: 100%;
+}
+.Hero-Section {
+  min-height: min(720px, 78vh);
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.22)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.85)),
+    url("coffe.jpg") center/cover no-repeat;
+}
+.hero-content {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: clamp(70px, 10vw, 140px) clamp(24px, 8vw, 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.maina {
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.Hero-Section h1 {
+  font:
+    700 clamp(3rem, 7vw, 6rem)/0.95 "Playfair Display",
+    serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.Hero-Section p {
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+}
+.btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 15px;
+}
+.btn a,
+.card button,
+.contact button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.8px;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.btn1 {
+  background: var(--gold);
+  color: var(--text);
+}
+.btn2 {
+  background: rgba(232, 227, 227, 0.18);
+  color: var(--text);
+  backdrop-filter: blur(8px);
+}
+.btn a:hover,
+.card button:hover,
+.contact button:hover {
+  transform: translateY(-3px);
+}
+.coffe-state {
+  border-block: 1px solid var(--gold);
+  background: var(--bg-secondary);
+  padding: clamp(45px, 7vw, 75px) 24px;
+  text-align: center;
+}
+.coffe-state h2 {
+  color: var(--gold);
+  font:
+    600 clamp(1.8rem, 4vw, 3rem) "Playfair Display",
+    serif;
+  text-transform: uppercase;
+}
+.coffe-state h2 span {
+  color: var(--text-muted);
+}
+.coffe-state .container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(28px, 8vw, 100px);
+  margin-top: 30px;
+}
+.state {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+}
+.state strong {
+  color: var(--gold);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+}
+.state span {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+.Specialties,
+.MENU-SECTION {
+  background: var(--bg-secondary);
+  padding: clamp(65px, 9vw, 110px) 24px;
+}
+.section-inner,
+.menu-container,
+.about-container,
+.contact-container {
+  max-width: 1200px;
+  margin: auto;
+}
+.section-intro,
+.menu-title,
+.contact-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.section-intro h6,
+.menu-title h2,
+.contact-title h2 {
+  color: var(--gold);
+  font-size: 0.82rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.section-intro h2,
+.menu-title h3,
+.contact-title h3 {
+  font:
+    600 clamp(2.25rem, 5vw, 3.5rem) "Playfair Display",
+    serif;
+  text-transform: uppercase;
+}
+.section-intro p,
+.menu-title p,
+.contact-title p {
+  color: var(--text-muted);
+  max-width: 520px;
+}
+.container-card {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 4vw, 50px);
+  margin-top: 45px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 410px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--card);
+  text-align: center;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-8px);
+}
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  filter: grayscale(80%);
+  transition: filter 0.3s;
+}
+.card:hover img {
+  filter: grayscale(0);
+}
+.text-card {
+  padding: 22px 18px 12px;
+}
+.text-card h3 {
+  color: var(--gold);
+  font:
+    600 1.5rem "Playfair Display",
+    serif;
+}
+.text-card p {
+  color: var(--text-muted);
+  margin-top: 9px;
+}
+.card button {
+  align-self: center;
+  margin: auto 18px 22px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text);
+}
+.about {
+  padding: clamp(65px, 8vw, 100px) 24px;
+}
+.about-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+  gap: clamp(35px, 9vw, 130px);
+  align-items: center;
+}
+.about-container img {
+  border: 2px solid var(--gold);
+  border-radius: 55px;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  filter: grayscale(70%);
+}
+.text-container h2 {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.text-container h3 {
+  color: var(--text);
+  font:
+    600 clamp(2.4rem, 5vw, 4rem)/1.08 "Playfair Display",
+    serif;
+  margin: 16px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.text-container p {
+  color: var(--text-muted);
+  margin-top: 16px;
+  text-align: center;
+}
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.menu-item {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 60px);
+}
+.menu-group {
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: clamp(18px, 3vw, 28px);
+}
+.menu-group > h3 {
+  color: var(--gold);
+  font:
+    600 clamp(1.25rem, 2.3vw, 1.7rem) "Playfair Display",
+    serif;
+  margin-bottom: 18px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.item {
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+.item-text {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  justify-content: space-between;
+}
+.item h4 {
+  color: var(--text);
+  font:
+    500 clamp(1rem, 1.8vw, 1.25rem) "Playfair Display",
+    serif;
+}
+.item p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+.price {
+  color: var(--gold);
+  white-space: nowrap;
+}
+.item small {
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  color: var(--gold);
+  font:
+    500 0.55rem Inter,
+    sans-serif;
+  letter-spacing: 0.5px;
+  margin-left: 5px;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.contact-section {
+  padding: clamp(65px, 9vw, 110px) 24px;
+}
+.contact-box {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 5vw, 50px);
+  margin-top: 40px;
+}
+.contact-info,
+.contact {
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: clamp(20px, 3vw, 32px);
+}
+.contact-info > h3,
+.contact h3 {
+  color: var(--gold);
+  font:
+    600 clamp(1.35rem, 2.6vw, 1.8rem) "Playfair Display",
+    serif;
+  margin-bottom: 22px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.info {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.info i {
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  flex: 0 0 42px;
+  height: 42px;
+  place-items: center;
+}
+.info h4 {
+  color: var(--gold);
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.info p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 3px;
+}
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.contact label {
+  color: var(--text);
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.contact input,
+.contact textarea {
+  width: 100%;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  color: var(--text);
+  padding: 13px;
+}
+.contact textarea {
+  resize: vertical;
+  min-height: 115px;
+}
+.contact button {
+  background: transparent;
+  color: var(--gold);
+  margin-top: 9px;
+}
+.contact button:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+footer {
+  border-top: 1px solid var(--gold);
+  background: var(--bg-secondary);
+  padding: 45px clamp(24px, 7vw, 80px) 24px;
+}
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+.footer-content h2 {
+  color: var(--gold);
+  font:
+    600 1.4rem "Playfair Display",
+    serif;
+  letter-spacing: 2px;
+}
+.footer-content p,
+.copyright {
+  color: var(--text-muted);
+}
+.footer-links a {
+  color: var(--text);
+  text-decoration: none;
+}
+.footer-links a:hover {
+  color: var(--gold);
+}
+.copyright {
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  margin-top: 35px;
+  padding-top: 18px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .container-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
+    justify-self: center;
+    width: 100%;
+  }
+  .about-container {
+    gap: 45px;
+  }
+  .about-container img {
+    height: 420px;
+  }
+  .menu-item,
+  .contact-box {
+    gap: 24px;
+  }
+}
+@media (max-width: 640px) {
+  header {
+    margin: 12px auto;
+    width: calc(100% - 24px);
+    padding: 15px 18px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .Hero-Section {
+    min-height: 650px;
+    background-position: 60% center;
+  }
+  .hero-content {
+    padding: 70px 24px;
+  }
+  .desktop-break {
+    display: none;
+  }
+  .btn {
+    width: 100%;
+  }
+  .btn a {
+    flex: 1 1 180px;
+  }
+  .coffe-state .container {
+    gap: 24px;
+  }
+  .state {
+    min-width: 88px;
+  }
+  .state span {
+    font-size: 0.72rem;
+  }
+  .container-card,
+  .about-container,
+  .menu-item,
+  .contact-box {
+    grid-template-columns: 1fr;
+  }
+  .card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+  .card {
+    min-height: 385px;
+  }
+  .about-container img {
+    height: 330px;
+    border-radius: 35px;
+  }
+  .text-container h3 {
+    font-size: 2.6rem;
+  }
+  .menu-group {
+    padding: 18px;
+  }
+  .item-text {
+    gap: 10px;
+  }
+  .item h4 {
+    max-width: 72%;
+  }
+  .contact-info,
+  .contact {
+    padding: 20px;
+  }
+  .footer-content {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .footer-links {
+    gap: 20px;
+  }
+}
+@media (max-width: 390px) {
+  nav ul {
+    justify-content: center;
+    gap: 10px 16px;
+  }
+  .Hero-Section h1 {
+    font-size: 2.7rem;
+  }
+  .coffe-state h2 {
+    font-size: 1.65rem;
+  }
+  .coffe-state .container {
+    gap: 18px;
+  }
+  .state strong {
+    font-size: 2rem;
+  }
+  .state span {
+    font-size: 0.65rem;
+  }
+  .item-text {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .item h4 {
+    max-width: none;
+  }
+  .price {
+    font-size: 0.95rem;
+  }
+}
