@@ -506,6 +506,31 @@ footer {
 .footer-links a:hover {
   color: var(--gold);
 }
+.social-links {
+  display: flex;
+  gap: 10px;
+}
+.social-links a {
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  display: grid;
+  height: 38px;
+  place-items: center;
+  text-decoration: none;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s,
+    transform 0.25s;
+  width: 38px;
+}
+.social-links a:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+  transform: translateY(-3px);
+}
 .copyright {
   border-top: 1px solid var(--border);
   font-size: 0.82rem;
