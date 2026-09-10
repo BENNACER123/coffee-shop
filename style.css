@@ -36,7 +36,8 @@ textarea {
   font: inherit;
 }
 header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 2;
   max-width: 1400px;
   margin: 20px auto;
