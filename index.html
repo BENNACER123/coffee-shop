@@ -3,29 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NOIR Coffee</title>
+    <title>NOIR Coffee | The art of coffee</title>
+    <meta
+      name="description"
+      content="NOIR Coffee: carefully selected beans, handcrafted drinks and desserts. Discover our menu, our story and visit us."
+    />
+    <meta name="theme-color" content="#07080a" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%2307080a%22/><text x=%2250%22 y=%2272%22 font-size=%2270%22 text-anchor=%22middle%22 fill=%22%23a57d4e%22 font-family=%22serif%22>N</text></svg>"
+    />
+
+    <!-- Adds the "js" class early, so CSS knows JavaScript is available -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
     />
+    <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header id="home">
-      <span class="logo">NOIR</span>
-      <nav aria-label="Main navigation">
+      <a class="logo" href="#home">NOIR</a>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" aria-label="Main navigation">
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#menu">Menu</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
-    <main>
-      <section class="Hero-Section">
+
+    <main id="main">
+      <section class="hero" data-section="home">
         <div class="hero-content">
-          <span class="maina">Crafted with passion ☕</span>
+          <span class="eyebrow">Crafted with passion ☕</span>
           <h1>The art<br />of coffee</h1>
           <p>
             Discover exceptional coffee made from<br class="desktop-break" />
@@ -40,31 +74,40 @@
         </div>
       </section>
 
-      <section class="coffe-state" aria-labelledby="experience-title">
+      <section class="stats" aria-labelledby="experience-title">
         <h2 id="experience-title"><span>The NOIR </span>experience</h2>
         <div class="container">
-          <div class="state">
-            <strong>15+</strong><span>Years of<br />experience</span>
+          <div class="state reveal" style="--i: 0">
+            <strong data-count="15" data-suffix="+">15+</strong
+            ><span>Years of<br />experience</span>
           </div>
-          <div class="state">
-            <strong>8</strong><span>Coffee<br />varieties</span>
+          <div class="state reveal" style="--i: 1">
+            <strong data-count="8">8</strong><span>Coffee<br />varieties</span>
           </div>
-          <div class="state">
-            <strong>12</strong><span>Signature<br />drinks</span>
+          <div class="state reveal" style="--i: 2">
+            <strong data-count="12">12</strong
+            ><span>Signature<br />drinks</span>
           </div>
         </div>
       </section>
 
-      <section class="Specialties">
+      <section class="specialties">
         <div class="section-inner">
-          <div class="section-intro">
-            <h6>What we offer</h6>
-            <h2>Our specialties</h2>
+          <div class="section-intro reveal">
+            <span class="eyebrow">What we offer</span>
+            <h2 class="section-title">Our specialties</h2>
             <p>Discover what makes every<br />visit to NOIR special.</p>
           </div>
           <div class="container-card">
-            <article class="card">
-              <img src="cofe.jpg" alt="Cup of coffee" />
+            <article class="card reveal" style="--i: 0">
+              <img
+                src="cofe.jpg"
+                alt="Cup of coffee"
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="text-card">
                 <h3>Coffee</h3>
                 <p>
@@ -72,12 +115,19 @@
                   expertly crafted into every cup.
                 </p>
               </div>
-              <button type="button">
-                Discover <span aria-hidden="true">→</span>
-              </button>
+              <a class="card-link" href="#menu" data-tab="coffee"
+                >Discover <span aria-hidden="true">→</span></a
+              >
             </article>
-            <article class="card">
-              <img src="cack.jpg" alt="Coffee dessert" />
+            <article class="card reveal" style="--i: 1">
+              <img
+                src="cack.jpg"
+                alt="Coffee dessert"
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="text-card">
                 <h3>Desserts</h3>
                 <p>
@@ -85,12 +135,19 @@
                   perfectly complement your coffee.
                 </p>
               </div>
-              <button type="button">
-                Discover <span aria-hidden="true">→</span>
-              </button>
+              <a class="card-link" href="#menu" data-tab="desserts"
+                >Discover <span aria-hidden="true">→</span></a
+              >
             </article>
-            <article class="card">
-              <img src="tea.jpg" alt="A cup of tea" />
+            <article class="card reveal" style="--i: 2">
+              <img
+                src="tea.jpg"
+                alt="A cup of tea"
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
               <div class="text-card">
                 <h3>Tea</h3>
                 <p>
@@ -98,20 +155,28 @@
                   teas for every moment.
                 </p>
               </div>
-              <button type="button">
-                Discover <span aria-hidden="true">→</span>
-              </button>
+              <a class="card-link" href="#menu" data-tab="tea"
+                >Discover <span aria-hidden="true">→</span></a
+              >
             </article>
           </div>
         </div>
       </section>
 
-      <section class="about" id="about">
+      <section class="about" id="about" data-section="about">
         <div class="about-container">
-          <img src="about.jpg" alt="Barista preparing coffee" />
-          <div class="text-container">
-            <h2>Our story</h2>
-            <h3>More than<br />just coffee</h3>
+          <img
+            class="reveal"
+            src="about.jpg"
+            alt="Barista preparing coffee"
+            width="700"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="text-container reveal">
+            <span class="eyebrow">Our story</span>
+            <h2 class="section-title">More than<br />just coffee</h2>
             <p>
               At NOIR, we believe coffee is more than a drink. It is a moment to
               slow down, connect, and enjoy something crafted with intention.
@@ -124,18 +189,56 @@
         </div>
       </section>
 
-      <section class="MENU-SECTION" id="menu">
+      <section class="menu-section" id="menu" data-section="menu">
         <div class="menu-container">
-          <div class="menu-title">
-            <h2>Our menu</h2>
-            <h3>Crafted for you</h3>
+          <div class="menu-title reveal">
+            <span class="eyebrow">Our menu</span>
+            <h2 class="section-title">Crafted for you</h2>
             <p>
               Explore our selection of carefully crafted drinks and sweet
               creations.
             </p>
           </div>
-          <div class="menu-item">
-            <div class="menu-group">
+
+          <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+            <button
+              type="button"
+              role="tab"
+              id="tab-coffee"
+              aria-selected="true"
+              aria-controls="panel-coffee"
+            >
+              Coffee
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tab-desserts"
+              aria-selected="false"
+              aria-controls="panel-desserts"
+              tabindex="-1"
+            >
+              Desserts
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tab-tea"
+              aria-selected="false"
+              aria-controls="panel-tea"
+              tabindex="-1"
+            >
+              Tea
+            </button>
+          </div>
+
+          <div class="menu-item reveal">
+            <div
+              class="menu-group"
+              role="tabpanel"
+              id="panel-coffee"
+              aria-labelledby="tab-coffee"
+            >
               <h3>Coffee &amp; specialties</h3>
               <div class="item">
                 <div class="item-text">
@@ -159,7 +262,13 @@
                 <p>12-hour slow steeped coffee</p>
               </div>
             </div>
-            <div class="menu-group">
+
+            <div
+              class="menu-group"
+              role="tabpanel"
+              id="panel-desserts"
+              aria-labelledby="tab-desserts"
+            >
               <h3>Desserts &amp; pastry</h3>
               <div class="item">
                 <div class="item-text">
@@ -183,21 +292,51 @@
                 <p>Flaky pastry with almond cream</p>
               </div>
             </div>
+
+            <div
+              class="menu-group"
+              role="tabpanel"
+              id="panel-tea"
+              aria-labelledby="tab-tea"
+            >
+              <h3>Tea &amp; infusions</h3>
+              <div class="item">
+                <div class="item-text">
+                  <h4>Jasmine Green Tea</h4>
+                  <span class="price">$3.80</span>
+                </div>
+                <p>Light and floral, brewed to order</p>
+              </div>
+              <div class="item">
+                <div class="item-text">
+                  <h4>Earl Grey Reserve</h4>
+                  <span class="price">$4.00</span>
+                </div>
+                <p>Black tea scented with bergamot</p>
+              </div>
+              <div class="item">
+                <div class="item-text">
+                  <h4>Fresh Mint Infusion</h4>
+                  <span class="price">$3.50</span>
+                </div>
+                <p>Hand-picked mint leaves and hot water</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="contact-section" id="contact">
+      <section class="contact-section" id="contact" data-section="contact">
         <div class="contact-container">
-          <div class="contact-title">
-            <h2>Get in touch</h2>
-            <h3>Let's connect</h3>
+          <div class="contact-title reveal">
+            <span class="eyebrow">Get in touch</span>
+            <h2 class="section-title">Let's connect</h2>
             <p>
               Have a question or want to visit NOIR? We'd love to hear from you.
             </p>
           </div>
           <div class="contact-box">
-            <div class="contact-info">
+            <div class="contact-info reveal">
               <h3>Contact information</h3>
               <div class="info">
                 <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
@@ -228,44 +367,66 @@
                 </div>
               </div>
             </div>
-            <div class="contact">
+            <div class="contact reveal" style="--i: 1">
               <h3>Send a message</h3>
-              <form>
-                <label for="name">Name</label
-                ><input
-                  type="text"
-                  id="name"
-                  placeholder="Your name"
-                  name="name"
-                  required
-                /><label for="email">Email</label
-                ><input
-                  type="email"
-                  id="email"
-                  placeholder="name@email.com"
-                  name="email"
-                  required
-                /><label for="message">Message</label
-                ><textarea
-                  placeholder="Your message"
-                  id="message"
-                  name="msg"
-                  rows="5"
-                ></textarea
-                ><button type="submit">Send message</button>
+              <form id="contact-form" novalidate>
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    aria-describedby="name-error"
+                    required
+                  />
+                  <span class="error" id="name-error"></span>
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="name@email.com"
+                    autocomplete="email"
+                    aria-describedby="email-error"
+                    required
+                  />
+                  <span class="error" id="email-error"></span>
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="msg"
+                    placeholder="Your message"
+                    rows="5"
+                    aria-describedby="message-error"
+                    required
+                  ></textarea>
+                  <span class="error" id="message-error"></span>
+                </div>
+                <button type="submit">Send message</button>
+                <p class="form-status" role="status" aria-live="polite"></p>
               </form>
             </div>
           </div>
         </div>
       </section>
     </main>
+
     <footer>
       <div class="footer-content">
-        <h2>NOIR Coffee</h2>
-        <p>Crafted with passion.</p>
+        <div class="footer-brand-block">
+          <p class="footer-brand">NOIR Coffee</p>
+          <p>Crafted with passion.</p>
+          <p>Open daily, 08:00–22:00</p>
+        </div>
         <div class="footer-links">
-          <a href="#home">Home</a><a href="#menu">Menu</a
-          ><a href="#contact">Contact</a>
+          <a href="#home">Home</a><a href="#about">About</a
+          ><a href="#menu">Menu</a><a href="#contact">Contact</a>
         </div>
         <div class="social-links" aria-label="Social media links">
           <a
@@ -296,5 +457,6 @@
       </div>
       <p class="copyright">© 2026 Noir Coffee. All rights reserved.</p>
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>

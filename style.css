@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap");
-
 :root {
   --bg: #07080a;
   --bg-secondary: #121317;
@@ -8,6 +6,8 @@
   --text: #f2f0ec;
   --text-muted: #a9a5a0;
   --border: #413e40;
+  --error: #e8897d;
+  color-scheme: dark;
 }
 * {
   box-sizing: border-box;
@@ -16,6 +16,9 @@
 }
 html {
   scroll-behavior: smooth;
+}
+[id] {
+  scroll-margin-top: 110px;
 }
 body {
   background: var(--bg);
@@ -35,10 +38,69 @@ input,
 textarea {
   font: inherit;
 }
+
+/* ---------- Accessibility ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.skip-link {
+  background: var(--gold);
+  border-radius: 8px;
+  color: var(--bg);
+  font-weight: 600;
+  left: 16px;
+  padding: 10px 16px;
+  position: absolute;
+  text-decoration: none;
+  top: -80px;
+  z-index: 20;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+/* Scroll reveal: hidden only when JavaScript is available */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Header ---------- */
 header {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 10;
   max-width: 1400px;
   margin: 20px auto;
   padding: 18px clamp(20px, 4vw, 48px);
@@ -55,6 +117,7 @@ header {
   font-family: "Playfair Display", serif;
   font-size: 1.35rem;
   letter-spacing: 3px;
+  text-decoration: none;
 }
 .logo::first-letter {
   color: var(--text-muted);
@@ -85,20 +148,67 @@ nav a::after {
   transition: width 0.3s;
   width: 0;
 }
-nav a:hover {
+nav a:hover,
+nav a.active {
   color: var(--gold);
 }
-nav a:hover::after {
+nav a:hover::after,
+nav a.active::after {
   width: 100%;
 }
-.Hero-Section {
+
+/* Hamburger button (visible on small screens only) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.nav-toggle span {
+  background: var(--gold);
+  border-radius: 2px;
+  height: 2px;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+  width: 18px;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: min(720px, 78vh);
   display: flex;
   align-items: center;
+}
+.hero::before {
+  animation: hero-zoom 24s ease-in-out infinite alternate;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.22)),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.85)),
     url("coffe.jpg") center/cover no-repeat;
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: -1;
 }
 .hero-content {
   width: min(100%, 1200px);
@@ -109,20 +219,37 @@ nav a:hover::after {
   align-items: flex-start;
   gap: 20px;
 }
-.maina {
+/* One orchestrated entrance on page load */
+.hero-content > * {
+  animation: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-content > :nth-child(1) {
+  animation-delay: 0.1s;
+}
+.hero-content > :nth-child(2) {
+  animation-delay: 0.25s;
+}
+.hero-content > :nth-child(3) {
+  animation-delay: 0.4s;
+}
+.hero-content > :nth-child(4) {
+  animation-delay: 0.55s;
+}
+.eyebrow {
   color: var(--gold);
-  font-size: 0.8rem;
+  display: block;
+  font-size: 0.82rem;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
-.Hero-Section h1 {
+.hero h1 {
   font:
     700 clamp(3rem, 7vw, 6rem)/0.95 "Playfair Display",
     serif;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-.Hero-Section p {
+.hero p {
   color: var(--text-muted);
   font-size: clamp(1rem, 1.6vw, 1.15rem);
 }
@@ -133,7 +260,7 @@ nav a:hover::after {
   margin-top: 15px;
 }
 .btn a,
-.card button,
+.card-link,
 .contact button {
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -149,11 +276,14 @@ nav a:hover::after {
   letter-spacing: 0.8px;
   transition:
     transform 0.25s,
-    background 0.25s;
+    background 0.25s,
+    color 0.25s;
 }
 .btn1 {
   background: var(--gold);
-  color: var(--text);
+  border-color: var(--gold);
+  color: var(--bg);
+  font-weight: 600;
 }
 .btn2 {
   background: rgba(232, 227, 227, 0.18);
@@ -161,27 +291,29 @@ nav a:hover::after {
   backdrop-filter: blur(8px);
 }
 .btn a:hover,
-.card button:hover,
+.card-link:hover,
 .contact button:hover {
   transform: translateY(-3px);
 }
-.coffe-state {
+
+/* ---------- Stats ---------- */
+.stats {
   border-block: 1px solid var(--gold);
   background: var(--bg-secondary);
   padding: clamp(45px, 7vw, 75px) 24px;
   text-align: center;
 }
-.coffe-state h2 {
+.stats h2 {
   color: var(--gold);
   font:
     600 clamp(1.8rem, 4vw, 3rem) "Playfair Display",
     serif;
   text-transform: uppercase;
 }
-.coffe-state h2 span {
+.stats h2 span {
   color: var(--text-muted);
 }
-.coffe-state .container {
+.stats .container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -197,14 +329,17 @@ nav a:hover::after {
 .state strong {
   color: var(--gold);
   font-size: clamp(2.25rem, 4vw, 3rem);
+  font-variant-numeric: tabular-nums;
 }
 .state span {
   color: var(--text-muted);
   text-transform: uppercase;
   font-size: 0.9rem;
 }
-.Specialties,
-.MENU-SECTION {
+
+/* ---------- Shared section layout ---------- */
+.specialties,
+.menu-section {
   background: var(--bg-secondary);
   padding: clamp(65px, 9vw, 110px) 24px;
 }
@@ -224,19 +359,9 @@ nav a:hover::after {
   gap: 14px;
   text-align: center;
 }
-.section-intro h6,
-.menu-title h2,
-.contact-title h2 {
-  color: var(--gold);
-  font-size: 0.82rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-.section-intro h2,
-.menu-title h3,
-.contact-title h3 {
+.section-title {
   font:
-    600 clamp(2.25rem, 5vw, 3.5rem) "Playfair Display",
+    600 clamp(2.25rem, 5vw, 3.5rem)/1.1 "Playfair Display",
     serif;
   text-transform: uppercase;
 }
@@ -246,6 +371,8 @@ nav a:hover::after {
   color: var(--text-muted);
   max-width: 520px;
 }
+
+/* ---------- Specialties ---------- */
 .container-card {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -270,10 +397,13 @@ nav a:hover::after {
   height: 200px;
   object-fit: cover;
   filter: grayscale(80%);
-  transition: filter 0.3s;
+  transition:
+    filter 0.4s,
+    transform 0.6s;
 }
 .card:hover img {
   filter: grayscale(0);
+  transform: scale(1.06);
 }
 .text-card {
   padding: 22px 18px 12px;
@@ -288,12 +418,18 @@ nav a:hover::after {
   color: var(--text-muted);
   margin-top: 9px;
 }
-.card button {
+.card-link {
   align-self: center;
   margin: auto 18px 22px;
   background: rgba(255, 255, 255, 0.12);
   color: var(--text);
 }
+.card-link:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* ---------- About ---------- */
 .about {
   padding: clamp(65px, 8vw, 100px) 24px;
 }
@@ -311,41 +447,83 @@ nav a:hover::after {
   object-fit: cover;
   filter: grayscale(70%);
 }
-.text-container h2 {
-  color: var(--gold);
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  text-align: center;
-  text-transform: uppercase;
+.about-container img:not(.reveal) {
+  transition: filter 0.5s;
 }
-.text-container h3 {
-  color: var(--text);
-  font:
-    600 clamp(2.4rem, 5vw, 4rem)/1.08 "Playfair Display",
-    serif;
-  margin: 16px 0;
+.about-container img:hover {
+  filter: grayscale(0);
+}
+.text-container {
   text-align: center;
-  text-transform: uppercase;
+}
+.text-container .section-title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.08;
+  margin: 16px 0;
 }
 .text-container p {
   color: var(--text-muted);
   margin-top: 16px;
-  text-align: center;
 }
+
+/* ---------- Menu ---------- */
 .menu-container {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
+.menu-tabs {
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: -12px;
+}
+.js .menu-tabs {
+  display: flex;
+}
+.menu-tabs button {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.8px;
+  min-height: 44px;
+  padding: 0 26px;
+  text-transform: uppercase;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    color 0.25s;
+}
+.menu-tabs button:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+.menu-tabs button[aria-selected="true"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+  font-weight: 600;
+}
 .menu-item {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 5vw, 60px);
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-inline: auto;
+  max-width: 780px;
+  width: 100%;
 }
 .menu-group {
+  animation: fade-up 0.45s ease both;
   border: 1px solid var(--gold);
   border-radius: 12px;
   padding: clamp(18px, 3vw, 28px);
+}
+.menu-group[hidden] {
+  display: none;
 }
 .menu-group > h3 {
   color: var(--gold);
@@ -359,6 +537,13 @@ nav a:hover::after {
 .item {
   padding: 16px 0;
   border-top: 1px solid var(--border);
+  transition: padding-left 0.3s;
+}
+.item:hover {
+  padding-left: 8px;
+}
+.item:hover h4 {
+  color: var(--gold);
 }
 .item-text {
   display: flex;
@@ -371,6 +556,7 @@ nav a:hover::after {
   font:
     500 clamp(1rem, 1.8vw, 1.25rem) "Playfair Display",
     serif;
+  transition: color 0.3s;
 }
 .item p {
   color: var(--text-muted);
@@ -386,14 +572,16 @@ nav a:hover::after {
   border-radius: 4px;
   color: var(--gold);
   font:
-    500 0.55rem Inter,
+    500 0.65rem Inter,
     sans-serif;
   letter-spacing: 0.5px;
   margin-left: 5px;
-  padding: 2px 4px;
+  padding: 2px 5px;
   text-transform: uppercase;
   white-space: nowrap;
 }
+
+/* ---------- Contact ---------- */
 .contact-section {
   padding: clamp(65px, 9vw, 110px) 24px;
 }
@@ -448,7 +636,12 @@ nav a:hover::after {
 .contact form {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 16px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .contact label {
   color: var(--text);
@@ -465,19 +658,45 @@ nav a:hover::after {
   color: var(--text);
   padding: 13px;
 }
+.contact input[aria-invalid="true"],
+.contact textarea[aria-invalid="true"] {
+  border-color: var(--error);
+}
 .contact textarea {
   resize: vertical;
   min-height: 115px;
 }
+.error {
+  color: var(--error);
+  font-size: 0.82rem;
+}
+.error:empty {
+  display: none;
+}
 .contact button {
   background: transparent;
   color: var(--gold);
-  margin-top: 9px;
+  margin-top: 4px;
 }
 .contact button:hover {
   background: var(--gold);
   color: var(--bg);
 }
+.contact button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+  transform: none;
+}
+.form-status {
+  color: var(--gold);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.form-status:empty {
+  display: none;
+}
+
+/* ---------- Footer ---------- */
 footer {
   border-top: 1px solid var(--gold);
   background: var(--bg-secondary);
@@ -489,7 +708,7 @@ footer {
   justify-content: space-between;
   gap: 25px;
 }
-.footer-content h2 {
+.footer-content .footer-brand {
   color: var(--gold);
   font:
     600 1.4rem "Playfair Display",
@@ -539,6 +758,8 @@ footer {
   padding-top: 18px;
   text-align: center;
 }
+
+/* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .container-card {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -555,9 +776,50 @@ footer {
   .about-container img {
     height: 420px;
   }
-  .menu-item,
   .contact-box {
     gap: 24px;
+  }
+}
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  /* Collapsible nav: the grid row animates from 0fr to 1fr */
+  nav {
+    display: grid;
+    flex-basis: 100%;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+  }
+  nav.open {
+    grid-template-rows: 1fr;
+  }
+  nav ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    min-height: 0;
+    overflow: hidden;
+    transition: visibility 0.35s;
+    visibility: hidden;
+  }
+  nav.open ul {
+    visibility: visible;
+  }
+  nav li:first-child a {
+    margin-top: 14px;
+  }
+  nav a {
+    border-top: 1px solid var(--border);
+    display: block;
+    padding: 14px 0;
+  }
+  nav a::after {
+    display: none;
   }
 }
 @media (max-width: 640px) {
@@ -565,11 +827,11 @@ footer {
     margin: 12px auto;
     width: calc(100% - 24px);
     padding: 15px 18px;
-    flex-direction: column;
-    gap: 10px;
   }
-  .Hero-Section {
+  .hero {
     min-height: 650px;
+  }
+  .hero::before {
     background-position: 60% center;
   }
   .hero-content {
@@ -584,7 +846,7 @@ footer {
   .btn a {
     flex: 1 1 180px;
   }
-  .coffe-state .container {
+  .stats .container {
     gap: 24px;
   }
   .state {
@@ -595,7 +857,6 @@ footer {
   }
   .container-card,
   .about-container,
-  .menu-item,
   .contact-box {
     grid-template-columns: 1fr;
   }
@@ -609,9 +870,6 @@ footer {
   .about-container img {
     height: 330px;
     border-radius: 35px;
-  }
-  .text-container h3 {
-    font-size: 2.6rem;
   }
   .menu-group {
     padding: 18px;
@@ -635,17 +893,13 @@ footer {
   }
 }
 @media (max-width: 390px) {
-  nav ul {
-    justify-content: center;
-    gap: 10px 16px;
-  }
-  .Hero-Section h1 {
+  .hero h1 {
     font-size: 2.7rem;
   }
-  .coffe-state h2 {
+  .stats h2 {
     font-size: 1.65rem;
   }
-  .coffe-state .container {
+  .stats .container {
     gap: 18px;
   }
   .state strong {
@@ -664,5 +918,24 @@ footer {
   }
   .price {
     font-size: 0.95rem;
+  }
+}
+
+/* ---------- Reduced motion: keep it last so it wins ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
